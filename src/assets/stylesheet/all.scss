@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/functions";
+@import "./helper/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/bootstrap";
+
+// page
+@import "./pages/front-products.scss";
+@import "./pages/login.scss";

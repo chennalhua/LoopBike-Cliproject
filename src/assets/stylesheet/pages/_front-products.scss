@@ -1,0 +1,14 @@
+.front-product-list{
+    cursor: pointer;
+}
+
+.img-mask{
+    overflow: hidden;
+    height:230px;
+    img{
+        transition: all .5s;
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+}
