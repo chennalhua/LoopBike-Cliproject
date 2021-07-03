@@ -3,25 +3,25 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    component: () => import('../views/Front.vue'),
+    component: () => import('../views/front/Front.vue'),
     children: [
       {
         path: 'products',
-        component: () => import('../views/Products.vue'),
+        component: () => import('../views/front/Products.vue'),
       },
       {
         path: 'product-info/:id',
-        component: () => import('../views/ProductInfo.vue'),
+        component: () => import('../views/front/ProductInfo.vue'),
       },
     ],
   },
   {
     path: '/login',
-    component: () => import('../views/Login.vue'),
+    component: () => import('../views/front/Login.vue'),
   },
   {
     path: '/admin',
-    component: () => import('../views/Back.vue'),
+    component: () => import('../views/admin/Back.vue'),
     children: [
       {
         path: 'products',
