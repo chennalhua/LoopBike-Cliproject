@@ -50,7 +50,7 @@ export default {
                     document.cookie = `MyToken=${token}; expires=${new Date(expired)}`;
                     alert('登入成功～歡迎使用！');
                     // 跳轉要面
-                    this.$router.push('/admin/products');
+                    this.$router.push('/admin');
                 }
             })
             .catch((err) => {

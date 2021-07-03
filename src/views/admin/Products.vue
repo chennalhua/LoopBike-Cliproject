@@ -8,22 +8,25 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>分類</th>
+                            <th width="120">分類</th>
                             <th>產品名稱</th>
-                            <th>原價</th>
-                            <th>售價</th>
-                            <th>啟用狀態</th>
-                            <th>編輯</th>
+                            <th width="120" class="text-end">原價</th>
+                            <th width="120" class="text-end">售價</th>
+                            <th width="180" class="text-center">啟用狀態</th>
+                            <th width="180" class="text-center">編輯</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>3</td>
+                        <tr v-for="(item) in products" :key="item.id">
+                            <td>{{item.category}}</td>
+                            <td>{{item.title}}</td>
+                            <td v-text="toCurrency(item.origin_price)" class="text-end"></td>
+                            <td v-text="toCurrency(item.price)" class="text-end"></td>
+                            <td class="text-center">
+                                <span v-if="item.is_enabled" class="text-success">啟用</span>
+                                <span v-else>不啟用</span>
+                            </td>
+                            <td class="text-center"></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -51,20 +54,11 @@
                 const api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/products`;
                 this.$http.get(api)
                 .then((res) => {
-                    console.log(res);
+                    this.products = res.data.products;
                 });
             },
         },
         mounted() {
-            // 取得 token
-            const token = document.cookie.replace(/(?:(?:^|.*;\s*)MyToken\s*\s*([^;]*).*$)|^.*$/, '$1');
-            if (!token) {
-                alert('您尚未登入，請先登入！！');
-                // 跳轉回 login 頁面
-                this.$router.push('/login');
-            }
-            // 將 token 加到 headers 表頭裡
-            this.$http.defaults.headers.common.Authorization = token;
             this.getProducts();
         },
     };

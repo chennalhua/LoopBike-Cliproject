@@ -7,7 +7,9 @@
                     <div class="d-flex flex-column">
                         <ul class="list-unstyled">
                             <li class="nav-item">
-                                <a class="text-third nav-link p-0 btn btn-light py-2 mb-3">產品管理</a>
+                                <router-link class="text-third nav-link
+                                p-0 btn btn-light py-2 mb-3"
+                                to="/admin/products">產品管理</router-link>
                             </li>
                             <li class="nav-item">
                                 <a class="text-third nav-link p-0 btn btn-light py-2 mb-3">顧客</a>
@@ -22,3 +24,19 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    created() {
+        // 取得 token
+        const token = document.cookie.replace(/(?:(?:^|.*;\s*)MyToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+        if (!token) {
+            alert('您尚未登入，請先登入！！');
+            // 跳轉回 login 頁面
+            this.$router.push('/login');
+        }
+        // 將 token 加到 headers 表頭裡
+        this.$http.defaults.headers.common.Authorization = token;
+    },
+};
+</script>
