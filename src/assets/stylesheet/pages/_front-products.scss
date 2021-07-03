@@ -4,9 +4,11 @@
 
 .img-mask{
     overflow: hidden;
-    height:230px;
     img{
         transition: all .5s;
+        height: 260px;
+        object-fit: cover;
+        object-position: 50% 50%;
         &:hover{
             transform: scale(1.1);
         }

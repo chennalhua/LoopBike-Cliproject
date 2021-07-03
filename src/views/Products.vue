@@ -1,10 +1,12 @@
 <template>
     <div class="container">
-        <div class="front-product-list row p-0 mt-5 px-5">
-            <div class="col-md-6 col-lg-4 px-4 mb-4 border-0"
+        <div class="front-product-list row p-0 mt-5">
+            <div class="col-12 col-md-6 col-lg-4 mb-4 border-0"
             v-for="(item) in products" :key="item.id" @click="goToPage(item)">
                 <div class="card h-100 border-0">
-                    <div class="img-mask"><img class="img-fluid" :src="item.imageUrl"></div>
+                    <div class="img-mask">
+                        <img class="img-fluid card-img-top" :src="item.imageUrl" :alt="item.title">
+                    </div>
                     <div class="card-body text-gray">
                         <h5 class="card-title">{{item.title}}</h5>
                         <p>{{item.content}}</p>
