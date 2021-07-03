@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-1 p-0">
-                <nav class="bg-third p-3 text-center vh-100">
+                <nav class="bg-third p-3 text-center" style="min-height:100%">
                     <h1 class="h5 text-light mb-4">後台</h1>
                     <div class="d-flex flex-column">
                         <ul class="list-unstyled">
@@ -20,7 +20,7 @@
                     </div>
                 </nav>
             </div>
-            <router-view class="col-11"></router-view>
+            <router-view></router-view>
         </div>
     </div>
 </template>
