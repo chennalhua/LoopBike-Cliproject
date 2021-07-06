@@ -6,7 +6,7 @@ id="deleteModal" tabindex="-1"
  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-danger text-light">
         <h5 class="modal-title"
         id="deleteModal">刪除</h5>
         <button type="button" class="btn-close"
@@ -14,12 +14,13 @@ id="deleteModal" tabindex="-1"
         aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        是否刪除 <strong class="text-danger">{{product.title}}</strong>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-        data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" @click="closeModal()"
+        >關閉</button>
+        <button type="button" class="btn btn-danger"
+        @click="$emit('deleteModal')">確認刪除</button>
       </div>
     </div>
   </div>
@@ -30,14 +31,18 @@ id="deleteModal" tabindex="-1"
 import Modal from 'bootstrap/js/dist/modal';
 
 export default {
+    props: ['product'],
     data() {
         return {
             modal: '',
         };
     },
     methods: {
-        closeModal() {
+        openModal() {
             this.modal.show();
+        },
+        closeModal() {
+          this.modal.hide();
         },
     },
     mounted() {
