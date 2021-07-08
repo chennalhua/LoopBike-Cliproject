@@ -19,6 +19,7 @@ import { localize, setLocale } from '@vee-validate/i18n';
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 
 import toCurrency from './assets/javascript/toCurrency';
+import dateConversion from './assets/javascript/dateConversion';
 import 'bootstrap';
 
 import App from './App.vue';
@@ -47,5 +48,6 @@ app.component('Form', Form);
 app.component('Field', Field);
 app.component('ErrorMessage', ErrorMessage);
 app.config.globalProperties.toCurrency = toCurrency; // 加到全域屬性下
+app.config.globalProperties.dateConversion = dateConversion; // 加到全域屬性下
 app.use(router);
 app.mount('#app');
