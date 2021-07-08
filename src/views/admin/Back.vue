@@ -1,22 +1,36 @@
 <template>
     <div class="container-fluid">
+        <div class="bg-third py-3 row">
+            <div class="col-1 p-0">
+                <h1 class="h5 text-light m-0 text-center">後台</h1>
+            </div>
+            <div class="col-11 d-flex justify-content-end pe-4">
+                <a href="#" class="logout rounded" @click.prevent="logout">
+                    <i class="bi bi-box-arrow-left pe-2"></i>登出</a>
+            </div>
+        </div>
         <div class="row">
             <div class="col-1 p-0">
                 <nav class="bg-third p-3 text-center" style="min-height:100%">
-                    <h1 class="h5 text-light mb-4">後台</h1>
                     <div class="d-flex flex-column">
                         <ul class="list-unstyled">
                             <li class="nav-item">
-                                <router-link class="text-third nav-link
-                                p-0 btn btn-light py-2 mb-3"
-                                to="/admin/products">產品管理</router-link>
+                                <router-link class="sidebar-link
+                                p-0 py-2 mb-3 d-block rounded"
+                                to="/admin/products">
+                                <i class="bi bi-box-seam d-block"></i>
+                                產品管理
+                                </router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="text-third nav-link p-0 btn btn-light py-2 mb-3">顧客</a>
+                                <router-link class="sidebar-link
+                                p-0 py-2 mb-3 d-block rounded"
+                                to="/admin/order">
+                                <i class="bi bi-file-earmark-person d-block"></i>
+                                客戶訂單
+                                </router-link>
                             </li>
                         </ul>
-                        <router-link class="text-light nav-link p-0 btn btn-secondary py-2"
-                        to="/">回前台</router-link>
                     </div>
                 </nav>
             </div>
@@ -27,6 +41,18 @@
 
 <script>
 export default {
+    methods: {
+        logout() {
+            const api = `${process.env.VUE_APP_URL}/logout`;
+            this.$http.post(api)
+            .then((res) => {
+                if (res.data.success) {
+                    alert('已登出');
+                    this.$router.push('/login');
+                }
+            });
+        },
+    },
     created() {
         // 取得 token
         const token = document.cookie.replace(/(?:(?:^|.*;\s*)MyToken\s*=\s*([^;]*).*$)|^.*$/, '$1');

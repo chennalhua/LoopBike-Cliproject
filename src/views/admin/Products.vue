@@ -1,8 +1,9 @@
 <template>
+    <Loading v-if="loading"></Loading>
     <div class="col-11">
         <div class="p-4">
             <h2 class="h4">產品管理</h2>
-            <div class="bg-light p-4 rounded">
+            <div class="bg-light p-4 rounded vh-100">
                 <button type="button" class="btn btn-primary
                 text-light d-block ms-auto mb-4"
                 @click="openModal('add',item)"
@@ -14,7 +15,7 @@
                             <th>產品名稱</th>
                             <th width="120" class="text-end">原價</th>
                             <th width="120" class="text-end">售價</th>
-                            <th width="180" class="text-center">上架狀態</th>
+                            <th width="120" class="text-center">上架狀態</th>
                             <th width="180" class="text-center">編輯</th>
                         </tr>
                     </thead>
@@ -27,9 +28,22 @@
                             <td v-text="toCurrency(item.price)"
                             class="text-end"></td>
                             <td class="text-center">
-                                <span v-if="item.is_enabled"
-                                class="text-success">上架</span>
-                                <span v-else>未上架</span>
+                                <div class="form-check form-switch">
+                                    <input v-model="item.is_enabled"
+                                    class="form-check-input checked"
+                                    type="checkbox"
+                                    :id="item.id"
+                                    :true-value="1"
+                                    :false-value="0"
+                                    @change="updateProduct(item)"
+                                    >
+                                    <label class="form-check-label text-success fw-bold"
+                                    :for="item.id" v-if="item.is_enabled">上架
+                                    </label>
+                                    <label class="form-check-label"
+                                    :for="item.id" v-else>未上架
+                                    </label>
+                                </div>
                             </td>
                             <td class="text-center">
                                 <div class="btn-group" role="group"
@@ -47,12 +61,8 @@
                     <tfoot>
                         <tr>
                             <td class="border-0">
-                                <button type="button"
-                                class="btn btn-outline-danger">刪除全部</button>
-                            </td>
-                            <td class="border-0" align="right" colspan="5">
                                 <Pagination :page="pagination"
-                                @getProducts="getProducts"></Pagination>
+                                @updatePage="getProducts"></Pagination>
                             </td>
                         </tr>
                     </tfoot>
@@ -62,7 +72,7 @@
                 @updateProduct="updateProduct"></ProductModal>
                 <DeleteModal ref="deleteModal"
                 :product="tempProduct"
-                @deleteModal="delPeoduct">
+                @deleteData="deletePeoduct">
                 </DeleteModal>
             </div>
         </div>
@@ -73,6 +83,7 @@
 import ProductModal from '@/components/admin/ProductModal.vue';
 import DeleteModal from '@/components/admin/DeleteModal.vue';
 import Pagination from '@/components/admin/Pagination.vue';
+import Loading from '@/components/Loading.vue';
 
     export default {
         data() {
@@ -83,21 +94,25 @@ import Pagination from '@/components/admin/Pagination.vue';
                     imagesUrl: [],
                 },
                 pagination: {},
+                loading: true,
             };
         },
         components: {
             ProductModal,
             DeleteModal,
             Pagination,
+            Loading,
         },
         methods: {
             getProducts(page = 1) { // 預設 page 參數為 1
                 const api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
                 this.$http.get(api)
                 .then((res) => {
-                    this.products = res.data.products;
-                    this.pagination = res.data.pagination;
-                    console.log(res.data);
+                    if (res.data.success) {
+                        this.products = res.data.products;
+                        this.pagination = res.data.pagination;
+                        this.loading = false;
+                    }
                 });
             },
             updateProduct(item) {
@@ -115,6 +130,7 @@ import Pagination from '@/components/admin/Pagination.vue';
                         const { productModal } = this.$refs; // 取的<ProductModal> DOM
                         productModal.closeModal();
                         this.getProducts();
+                        this.loading = false;
                     } else {
                         alert(res.data.message);
                     }
@@ -123,7 +139,7 @@ import Pagination from '@/components/admin/Pagination.vue';
                     console.log(err);
                 });
             },
-            delPeoduct() {
+            deletePeoduct() {
                 const api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
                 this.$http.delete(api)
                 .then((res) => {
@@ -131,6 +147,7 @@ import Pagination from '@/components/admin/Pagination.vue';
                         const { deleteModal } = this.$refs;
                         deleteModal.closeModal();
                         this.getProducts();
+                        this.loading = false;
                     } else {
                         alert(res.data.message);
                     }

@@ -14,13 +14,13 @@ id="deleteModal" tabindex="-1"
         aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        是否刪除 <strong class="text-danger">{{product.title}}</strong>
+        是否刪除此項目，一旦刪除無法復原！！
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" @click="closeModal()"
         >關閉</button>
         <button type="button" class="btn btn-danger"
-        @click="$emit('deleteModal')">確認刪除</button>
+        @click="$emit('deleteData')">確認刪除</button>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@ id="deleteModal" tabindex="-1"
 import Modal from 'bootstrap/js/dist/modal';
 
 export default {
-    props: ['product'],
+    props: ['product', 'order'],
     data() {
         return {
             modal: '',
