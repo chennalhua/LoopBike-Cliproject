@@ -3,6 +3,13 @@
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/bootstrap";
 
+// basic
+@import "./basic/basic";
+// components
+@import "./components/loading";
+
 // page
 @import "./pages/front-products.scss";
 @import "./pages/login.scss";
+// admin
+@import "./pages/admin/back";

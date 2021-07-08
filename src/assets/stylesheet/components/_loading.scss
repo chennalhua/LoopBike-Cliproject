@@ -1,0 +1,8 @@
+.loading-bg{
+    background:rgba(255,255,255,.5);
+    z-index: 1000;
+    .loading-box{
+        top: 50%;
+        left: 50%;
+    }
+}

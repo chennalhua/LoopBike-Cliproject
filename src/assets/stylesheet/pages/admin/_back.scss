@@ -1,0 +1,26 @@
+.logout{
+    color:white;
+    padding:5px 10px;
+    transition:all .3s;
+    &:hover{
+        background-color:$primary;
+        color:white;
+    }
+}
+
+.sidebar-link{
+    color: white;
+    transition:all .3s;
+    &:hover{
+        background-color:$primary;
+        color:white;
+    }
+    i{
+    font-size:1.5rem;
+    }
+}
+
+.back-active{
+    background-color:$primary;
+    color:white;
+}
