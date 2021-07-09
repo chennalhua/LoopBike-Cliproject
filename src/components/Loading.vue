@@ -10,8 +10,8 @@
 export default {
     data() {
         return {
-            loading: true
+            loading: true,
         };
     },
-}
+};
 </script>

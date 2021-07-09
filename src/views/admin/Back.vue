@@ -13,10 +13,11 @@
             <div class="col-1 p-0">
                 <nav class="bg-third p-3 text-center" style="min-height:100%">
                     <div class="d-flex flex-column">
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled backSidebar-list">
                             <li class="nav-item">
                                 <router-link class="sidebar-link
                                 p-0 py-2 mb-3 d-block rounded"
+                                active-class="backActive"
                                 to="/admin/products">
                                 <i class="bi bi-box-seam d-block"></i>
                                 產品管理
@@ -25,6 +26,7 @@
                             <li class="nav-item">
                                 <router-link class="sidebar-link
                                 p-0 py-2 mb-3 d-block rounded"
+                                active-class="backActive"
                                 to="/admin/order">
                                 <i class="bi bi-file-earmark-person d-block"></i>
                                 客戶訂單

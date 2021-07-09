@@ -6,6 +6,11 @@ const routes = [
     component: () => import('../views/front/Front.vue'),
     children: [
       {
+        path: '',
+        name: 'Home',
+        component: () => import('../views/front/Home.vue'),
+      },
+      {
         path: 'products',
         component: () => import('../views/front/Products.vue'),
       },
@@ -33,12 +38,18 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: { // 可以直接貼上路徑或 name
+      name: 'Home',
+    },
+  },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  linkActiveClass: 'back-active',
+  // linkActiveClass: 'back-active',
 });
 
 export default router;

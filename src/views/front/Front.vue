@@ -11,13 +11,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/">首頁</router-link>
+                        <router-link class="nav-link rounded" to="/"
+                        active-class="frontActive">首頁</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/products">產品列表</router-link>
+                        <router-link class="nav-link rounded" to="/products"
+                        active-class="frontActive">產品列表</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/login">登入</router-link>
+                        <router-link class="nav-link rounded" to="/login"
+                        active-class="frontActive">登入</router-link>
                     </li>
                 </ul>
             </div>
@@ -25,3 +28,28 @@
     </nav>
     <router-view></router-view>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            user: {
+                username: '',
+                password: '',
+            },
+        };
+    },
+    mothods: {
+        checkLogin() {
+            const api = `${process.env.VUE_APP_URL}/api/user/check`;
+            this.$http.post(api, this.user)
+            .then((res) => {
+                console.log(res);
+            });
+        },
+    },
+    mounted() {
+
+    },
+};
+</script>

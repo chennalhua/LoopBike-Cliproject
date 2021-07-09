@@ -1,0 +1,14 @@
+.navbar-dark .navbar-nav .nav-link{
+    color: white;
+    margin:0 10px;
+    transition:all .3s;
+    &:hover{
+        color: white;
+        background:$third;
+    }
+}
+
+.frontActive{
+    color: white;
+    background:$third;
+}
